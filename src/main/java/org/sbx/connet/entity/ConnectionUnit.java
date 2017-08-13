@@ -2,6 +2,7 @@ package org.sbx.connet.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -18,9 +19,14 @@ public class ConnectionUnit implements Serializable {
 
     private int capacity;
 
-    @JoinColumn(name = "node_id", referencedColumnName = "node_id")
+    @JoinTable(name = "node_cu", joinColumns = { @JoinColumn(name = "node_id", referencedColumnName = "node_id") },
+                                 inverseJoinColumns = { @JoinColumn(name = "cu_id", referencedColumnName = "cu_id") }
+    )
     @ManyToOne
     private Node node;
+
+    @OneToMany(mappedBy = "cu", fetch = FetchType.LAZY)
+    private List<Point> points;
 
     public long getCuId() {
         return cuId;
@@ -66,5 +72,21 @@ public class ConnectionUnit implements Serializable {
                 ", cuName='" + cuName + '\'' +
                 ", capacity=" + capacity +
                 '}';
+    }
+
+    public Node getNode() {
+        return node;
+    }
+
+    public void setNode(Node node) {
+        this.node = node;
+    }
+
+    public List<Point> getPoints() {
+        return points;
+    }
+
+    public void setPoints(List<Point> points) {
+        this.points = points;
     }
 }

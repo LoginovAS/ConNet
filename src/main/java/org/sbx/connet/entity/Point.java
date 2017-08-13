@@ -1,9 +1,6 @@
 package org.sbx.connet.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -19,6 +16,11 @@ public class Point implements Serializable {
 
     @Column(name = "point_number")
     private int pointNumber;
+
+    @JoinTable(name = "cu_point", joinColumns = { @JoinColumn(name = "point_id", referencedColumnName = "point_id") },
+                                  inverseJoinColumns = { @JoinColumn(name = "cu_id", referencedColumnName = "cu_id") })
+    @ManyToOne
+    private ConnectionUnit cu;
 
     public long getPointId() {
         return pointId;
