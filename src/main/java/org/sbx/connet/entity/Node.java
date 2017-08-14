@@ -7,6 +7,9 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "nodes")
+@NamedQueries({
+        @NamedQuery(name = "Node.getAllNodes", query = "SELECT n FROM Node n")
+})
 public class Node implements Serializable {
 
     @Id

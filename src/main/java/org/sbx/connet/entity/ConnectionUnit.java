@@ -19,8 +19,8 @@ public class ConnectionUnit implements Serializable {
 
     private int capacity;
 
-    @JoinTable(name = "node_cu", joinColumns = { @JoinColumn(name = "node_id", referencedColumnName = "node_id") },
-                                 inverseJoinColumns = { @JoinColumn(name = "cu_id", referencedColumnName = "cu_id") }
+    @JoinTable(name = "node_cu", joinColumns = { @JoinColumn(name = "cu_id", referencedColumnName = "cu_id") },
+                                 inverseJoinColumns = { @JoinColumn(name = "node_id", referencedColumnName = "node_id") }
     )
     @ManyToOne
     private Node node;
