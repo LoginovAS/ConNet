@@ -13,9 +13,6 @@ public class Point implements Serializable {
     @Column(name = "point_id")
     private long pointId;
 
-    @Column(name = "cu_id")
-    private long cuId;
-
     @Column(name = "point_number")
     private int pointNumber;
 
@@ -30,14 +27,6 @@ public class Point implements Serializable {
 
     public void setPointId(long pointId) {
         this.pointId = pointId;
-    }
-
-    public long getCuId() {
-        return cuId;
-    }
-
-    public void setCuId(long cuId) {
-        this.cuId = cuId;
     }
 
     public int getPointNumber() {
@@ -65,7 +54,6 @@ public class Point implements Serializable {
     public String toString() {
         return "Point{" +
                 "pointId=" + pointId +
-                ", cuId=" + cuId +
                 ", pointNumber=" + pointNumber +
                 '}';
     }

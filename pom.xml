@@ -65,9 +65,9 @@
                     <terse>false</terse>
                     <echo>true</echo>
                     <debug>true</debug>
-                    <glassfishDirectory>/home/isilme/local_apps/glassfish4</glassfishDirectory>
+                    <glassfishDirectory>c:\servers\glassfish4</glassfishDirectory>
                     <user>admin</user>
-                    <adminPassword>admin</adminPassword>
+                    <adminPassword>12345</adminPassword>
                     <domain>
                         <name>domain1</name>
                         <host>localhost</host>
