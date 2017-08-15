@@ -67,6 +67,29 @@ public class Node implements Serializable {
         this.building = building;
     }
 
+    public int getCapacity() {
+        int capacity = 0;
+        for (ConnectionUnit cu: connectors) {
+            capacity += cu.getCapacity();
+        }
+        return capacity;
+    }
+
+    public int getFreePool() {
+
+        int freePool = getCapacity();
+        for (ConnectionUnit cu: connectors) {
+            for (Point p: cu.getPoints()) {
+                if (p.getLinkedPoint() != null) {
+                    freePool--;
+                }
+            }
+        }
+
+        return freePool;
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

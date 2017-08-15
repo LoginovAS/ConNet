@@ -5,20 +5,20 @@ import org.sbx.connet.entity.Node;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
-@ManagedBean(name = "mainView")
-@ViewScoped
+@Named(value = "mainView")
+@SessionScoped
 public class MainView implements Serializable {
 
     @EJB
     private ConnetBean connetBean;
 
-    @ManagedProperty(value = "#{nodes}")
     private List<Node> nodes;
 
     @PostConstruct

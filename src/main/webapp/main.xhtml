@@ -1,30 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <title>JSF 2.0 Hello World</title>
 </h:head>
 <h:body bgcolor="white">
-    <p:dataTable value="#{mainView.nodes}" var="n">
-        <p:column headerText="Node ID">
-            #{n.nodeId}
-        </p:column>
-        <p:column headerText="Node name">
-            #{n.nodeName}
-        </p:column>
-        <p:column headerText="Region">
-            #{n.region}
-        </p:column>
-        <p:column headerText="Street">
-            #{n.street}
-        </p:column>
-        <p:column headerText="Building">
-            #{n.building}
-        </p:column>
-    </p:dataTable>
+    <p:panelGrid>
+        <f:facet name="header">
+            <p:row>
+                <p:column rowspan="2">
+                    <h:outputText value="Имя" />
+                </p:column>
+                <p:column colspan="2">
+                    <h:outputText value="Расположение" />
+                </p:column>
+                <p:column colspan="2">
+                    <h:outputText value="Точки" />
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+                    <h:outputText value="Улица" />
+                </p:column>
+                <p:column>
+                    <h:outputText value="Дом" />
+                </p:column>
+                <p:column>
+                    <h:outputText value="Всего" />
+                </p:column>
+                <p:column>
+                    <h:outputText value="Свободно" />
+                </p:column>
+            </p:row>
+        </f:facet>
+            <ui:repeat value="#{mainView.nodes}" var="n">
+                <p:row>
+                    <p:column>
+                        <h:outputText value="#{n.nodeName}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{n.street}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{n.building}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{n.capacity}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{n.freePool}" />
+                    </p:column>
+                </p:row>
+            </ui:repeat>
+    </p:panelGrid>
 </h:body>
 </html>

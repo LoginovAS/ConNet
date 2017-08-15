@@ -21,6 +21,11 @@ public class Point implements Serializable {
     @ManyToOne
     private ConnectionUnit cu;
 
+    @OneToOne
+    @JoinTable(name = "links", joinColumns = { @JoinColumn(name = "point_id_1", referencedColumnName = "point_id") },
+                                inverseJoinColumns = { @JoinColumn(name = "point_id_2", referencedColumnName = "point_id") })
+    private Point linkedPoint;
+
     public long getPointId() {
         return pointId;
     }
@@ -56,5 +61,13 @@ public class Point implements Serializable {
                 "pointId=" + pointId +
                 ", pointNumber=" + pointNumber +
                 '}';
+    }
+
+    public Point getLinkedPoint() {
+        return linkedPoint;
+    }
+
+    public void setLinkedPoint(Point linkedPoint) {
+        this.linkedPoint = linkedPoint;
     }
 }

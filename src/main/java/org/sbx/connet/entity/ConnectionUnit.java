@@ -1,5 +1,6 @@
 package org.sbx.connet.entity;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -17,8 +18,6 @@ public class ConnectionUnit implements Serializable {
     @Column(name = "cu_name")
     private String cuName;
 
-    private int capacity;
-
     @JoinTable(name = "node_cu", joinColumns = { @JoinColumn(name = "cu_id", referencedColumnName = "cu_id") },
                                  inverseJoinColumns = { @JoinColumn(name = "node_id", referencedColumnName = "node_id") }
     )
@@ -27,6 +26,8 @@ public class ConnectionUnit implements Serializable {
 
     @OneToMany(mappedBy = "cu", fetch = FetchType.LAZY)
     private List<Point> points;
+
+    transient private int capacity;
 
     public long getCuId() {
         return cuId;
@@ -45,11 +46,16 @@ public class ConnectionUnit implements Serializable {
     }
 
     public int getCapacity() {
-        return capacity;
+        return points.size();
     }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
+    @PostConstruct
+    private void init() {
+        if (points != null && !points.isEmpty()) {
+            capacity = points.size();
+        } else {
+            capacity = 0;
+        }
     }
 
     @Override
@@ -70,7 +76,6 @@ public class ConnectionUnit implements Serializable {
         return "ConnectionUnit{" +
                 "cuId=" + cuId +
                 ", cuName='" + cuName + '\'' +
-                ", capacity=" + capacity +
                 '}';
     }
 
@@ -88,5 +93,9 @@ public class ConnectionUnit implements Serializable {
 
     public void setPoints(List<Point> points) {
         this.points = points;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 }
