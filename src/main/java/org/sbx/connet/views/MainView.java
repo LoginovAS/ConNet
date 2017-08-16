@@ -19,11 +19,18 @@ public class MainView implements Serializable {
     @EJB
     private ConnetBean connetBean;
 
+    @EJB
+    private AddCuBean addCuBean;
+
     private List<Node> nodes;
 
     @PostConstruct
     private void init() {
         nodes = connetBean.getAllNodes();
+    }
+
+    public void action() {
+
     }
 
     public List<Node> getNodes() {
@@ -32,5 +39,13 @@ public class MainView implements Serializable {
 
     public void setNodes(List<Node> nodes) {
         this.nodes = nodes;
+    }
+
+    public AddCuBean getAddCuBean() {
+        return addCuBean;
+    }
+
+    public void setAddCuBean(AddCuBean addCuBean) {
+        this.addCuBean = addCuBean;
     }
 }

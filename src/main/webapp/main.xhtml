@@ -64,14 +64,17 @@
                                 <p:commandButton value="Добавить связь" />
                             </p:column>
                             <p:column>
-                                <p:commandButton value="Посмотреть Коннектор" />
+                                <p:commandButton actionListener="#{mainView.action()}" process="@this" value="Добавить коннектор" oncomplete="PF('addCuDlg').show();" />
                             </p:column>
                             <p:column>
-                                <p:commandButton value="Посмотреть Хост" />
+                                <p:commandButton value="Посмотреть хост" />
                             </p:column>
                         </p:row>
                     </p:panelGrid>
                 </h:form>
+                <p:dialog id="addCuDlg" width="200" height="200" widgetWar="addCuDlg">
+                    <ui:include src="addCuDlgPage.xhtml" />
+                </p:dialog>
             </p:column>
         </p:row>
     </p:panelGrid>

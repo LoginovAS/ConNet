@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+    <h:form id="addCuForm">
+        <pm:field>
+            <p:outputLabel for="addCuToNodeField" value="Хост:" />
+            <p:selectOneMenu id="addCuToNodeField" value="#{mainView.addCuBean.selectedNode}">
+                <f:selectItem itemLabel="Имя хоста" itemValue="#{null}" />
+            </p:selectOneMenu>
+        </pm:field>
+        <pm:field>
+            <p:outputLabel for="newCuNameField" value="Имя коннектора:" />
+            <p:inputText id="newCuNameField" value="#{mainView.addCuBean.newCuName}" />
+        </pm:field>
+        <pm:field>
+            <p:outputLabel for="newCuCapacityField" value="Количество точек:" />
+            <p:inputText id="newCuCapacityField" value="#{mainView.addCuBean.newCapacity}" />
+        </pm:field>
+        <pm:field>
+            <p:commandButton value="Сохранить" />
+            <p:commandButton value="Отменить" />
+        </pm:field>
+    </h:form>
+</ui:composition>
