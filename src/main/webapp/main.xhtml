@@ -7,41 +7,35 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title>JSF 2.0 Hello World</title>
+    <title>Connection Network</title>
 </h:head>
 <h:body bgcolor="white">
-    <p:panelGrid>
-        <f:facet name="header">
-            <p:row>
-                <p:column rowspan="2">
-                    <h:outputText value="Имя" />
-                </p:column>
-                <p:column colspan="2">
-                    <h:outputText value="Расположение" />
-                </p:column>
-                <p:column colspan="2">
-                    <h:outputText value="Точки" />
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
-                    <h:outputText value="Улица" />
-                </p:column>
-                <p:column>
-                    <h:outputText value="Дом" />
-                </p:column>
-                <p:column>
-                    <h:outputText value="Всего" />
-                </p:column>
-                <p:column>
-                    <h:outputText value="Свободно" />
-                </p:column>
-            </p:row>
-        </f:facet>
-            <ui:repeat value="#{mainView.nodes}" var="n">
-                <p:row>
+    <f:facet name="last">
+        <h:outputStylesheet name="css/styles.css" />
+    </f:facet>
+    <p:panelGrid style="margin: 0 auto;">
+        <p:row>
+            <p:column>
+                <p:dataTable value="#{mainView.nodes}" var="n" style="width: 50%; margin: 0 auto;" >
+                    <p:columnGroup type="header">
+                        <p:row>
+                            <p:column rowspan="2" headerText="Имя" />
+                            <p:column colspan="3" headerText="Расположение" />
+                            <p:column colspan="2" headerText="Точки" />
+                        </p:row>
+                        <p:row>
+                            <p:column headerText="Регион" />
+                            <p:column headerText="Улица" />
+                            <p:column headerText="Дом" />
+                            <p:column headerText="Всего" />
+                            <p:column headerText="Свободно" />
+                        </p:row>
+                    </p:columnGroup>
                     <p:column>
                         <h:outputText value="#{n.nodeName}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{n.region}" />
                     </p:column>
                     <p:column>
                         <h:outputText value="#{n.street}" />
@@ -55,8 +49,31 @@
                     <p:column>
                         <h:outputText value="#{n.freePool}" />
                     </p:column>
-                </p:row>
-            </ui:repeat>
+                </p:dataTable>
+            </p:column>
+        </p:row>
+        <p:row>
+            <p:column>
+                <h:form id="controlForm">
+                    <p:panelGrid style="margin: 0 auto;">
+                        <p:row>
+                            <p:column>
+                                <p:commandButton value="Посмотреть связи" />
+                            </p:column>
+                            <p:column>
+                                <p:commandButton value="Добавить связь" />
+                            </p:column>
+                            <p:column>
+                                <p:commandButton value="Посмотреть Коннектор" />
+                            </p:column>
+                            <p:column>
+                                <p:commandButton value="Посмотреть Хост" />
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </h:form>
+            </p:column>
+        </p:row>
     </p:panelGrid>
 </h:body>
 </html>
