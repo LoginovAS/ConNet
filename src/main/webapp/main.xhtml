@@ -13,6 +13,7 @@
     <f:facet name="last">
         <h:outputStylesheet name="css/styles.css" />
     </f:facet>
+    <h:form id="controlForm">
     <p:panelGrid style="margin: 0 auto;">
         <p:row>
             <p:column>
@@ -54,29 +55,28 @@
         </p:row>
         <p:row>
             <p:column>
-                <h:form id="controlForm">
-                    <p:panelGrid style="margin: 0 auto;">
-                        <p:row>
-                            <p:column>
-                                <p:commandButton value="Посмотреть связи" />
-                            </p:column>
-                            <p:column>
-                                <p:commandButton value="Добавить связь" />
-                            </p:column>
-                            <p:column>
-                                <p:commandButton actionListener="#{mainView.action()}" process="@this" value="Добавить коннектор" oncomplete="PF('addCuDlg').show();" />
-                            </p:column>
-                            <p:column>
-                                <p:commandButton value="Посмотреть хост" />
-                            </p:column>
-                        </p:row>
-                    </p:panelGrid>
-                </h:form>
-                <p:dialog id="addCuDlg" width="200" height="200" widgetWar="addCuDlg">
-                    <ui:include src="addCuDlgPage.xhtml" />
-                </p:dialog>
+                <p:panelGrid style="margin: 0 auto;">
+                    <p:row>
+                        <p:column>
+                            <!--<p:commandButton value="Посмотреть связи" />-->
+                        </p:column>
+                        <p:column>
+                            <!--<p:commandButton value="Добавить связь" />-->
+                        </p:column>
+                        <p:column>
+                            <p:commandButton actionListener="#{mainView.action}" process="@form" update="@this" value="Добавить коннектор" oncomplete="PF('addCuDlg').show();" />
+                        </p:column>
+                        <p:column>
+                            <!--<p:commandButton value="Посмотреть хост" />-->
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
             </p:column>
         </p:row>
     </p:panelGrid>
+    </h:form>
+    <p:dialog id="addCuDlg" width="200" modal="true" height="200" widgetWar="addCuDlg">
+        <ui:include src="/addCuDlgPage.xhtml" />
+    </p:dialog>
 </h:body>
 </html>

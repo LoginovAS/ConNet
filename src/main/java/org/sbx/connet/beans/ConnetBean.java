@@ -17,4 +17,5 @@ public class ConnetBean implements Serializable {
     public List<Node> getAllNodes() {
         return em.createNamedQuery("Node.getAllNodes", Node.class).getResultList();
     }
+    
 }

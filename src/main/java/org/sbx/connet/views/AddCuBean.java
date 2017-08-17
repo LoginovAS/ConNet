@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 import java.io.Serializable;
+import org.sbx.connet.entity.Node;
 
 @Named(value = "addCuBean")
 @Dependent
@@ -16,15 +17,21 @@ public class AddCuBean implements Serializable {
     @EJB
     private ConnetBean connetBean;
 
-    private String selectedNode = "";
-    private String newCuName = "";
-    private String newCapacity = "";
+    private Node selectedNode;
+    private String newCuName;
+    private String newCapacity;
+    
+    public void action() {
+        Node n = selectedNode;
+        String s1 = newCuName;
+        String s2 = newCapacity;
+    }
 
-    public String getSelectedNode() {
+    public Node getSelectedNode() {
         return selectedNode;
     }
 
-    public void setSelectedNode(String selectedNode) {
+    public void setSelectedNode(Node selectedNode) {
         this.selectedNode = selectedNode;
     }
 

@@ -30,7 +30,7 @@ public class MainView implements Serializable {
     }
 
     public void action() {
-
+        return;
     }
 
     public List<Node> getNodes() {
@@ -48,4 +48,5 @@ public class MainView implements Serializable {
     public void setAddCuBean(AddCuBean addCuBean) {
         this.addCuBean = addCuBean;
     }
+
 }
