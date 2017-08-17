@@ -11,9 +11,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.view.ViewScoped;
 
 @Named(value = "mainView")
-@SessionScoped
+@ViewScoped
 public class MainView implements Serializable {
 
     @EJB

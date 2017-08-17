@@ -21,6 +21,16 @@ public class AddCuBean implements Serializable {
     private String newCuName;
     private String newCapacity;
     
+    public void clearForm() {
+        selectedNode = null;
+        newCuName = null;
+        newCapacity = null;
+    }
+    
+    public void onDialogOpen() {
+        clearForm();
+    }
+    
     public void action() {
         Node n = selectedNode;
         String s1 = newCuName;

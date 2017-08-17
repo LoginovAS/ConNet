@@ -9,7 +9,7 @@
 <h:head>
     <title>Connection Network</title>
 </h:head>
-<h:body bgcolor="white">
+<h:body>
     <f:facet name="last">
         <h:outputStylesheet name="css/styles.css" />
     </f:facet>
@@ -58,16 +58,16 @@
                 <p:panelGrid style="margin: 0 auto;">
                     <p:row>
                         <p:column>
-                            <!--<p:commandButton value="Посмотреть связи" />-->
+                            <p:commandButton value="Посмотреть связи" />
                         </p:column>
                         <p:column>
-                            <!--<p:commandButton value="Добавить связь" />-->
+                            <p:commandButton value="Добавить связь" />
                         </p:column>
                         <p:column>
-                            <p:commandButton actionListener="#{mainView.action}" process="@form" update="@this" value="Добавить коннектор" oncomplete="PF('addCuDlg').show();" />
+                            <p:commandButton value="Добавить коннектор" actionListener="#{mainView.addCuBean.onDialogOpen()}" update="addCuForm" oncomplete="PF('addCuDlg').show();" />
                         </p:column>
                         <p:column>
-                            <!--<p:commandButton value="Посмотреть хост" />-->
+                            <p:commandButton value="Посмотреть хост" />
                         </p:column>
                     </p:row>
                 </p:panelGrid>
@@ -75,7 +75,7 @@
         </p:row>
     </p:panelGrid>
     </h:form>
-    <p:dialog id="addCuDlg" width="200" modal="true" height="200" widgetWar="addCuDlg">
+    <p:dialog id="addCuDlg" modal="true" dynamic="true" resizable="false" widgetVar="addCuDlg">
         <ui:include src="/addCuDlgPage.xhtml" />
     </p:dialog>
 </h:body>
