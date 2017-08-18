@@ -6,7 +6,19 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "points")
+@NamedQueries({
+    @NamedQuery(name = "Point.getPointsByCu",
+                query = "SELECT p FROM Point p WHERE p.cu = :cu"),
+    @NamedQuery(name = "Point.getAllPoints",
+                query = "SELECT p FROM Point p")
+})
 public class Point implements Serializable {
+
+    @Override
+    public String toString() {
+        return cu.getCuName() +
+                "_" + pointNumber;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,19 +67,25 @@ public class Point implements Serializable {
         return Objects.hash(pointId);
     }
 
-    @Override
-    public String toString() {
-        return "Point{" +
-                "pointId=" + pointId +
-                ", pointNumber=" + pointNumber +
-                '}';
-    }
-
     public Point getLinkedPoint() {
         return linkedPoint;
     }
 
     public void setLinkedPoint(Point linkedPoint) {
         this.linkedPoint = linkedPoint;
+    }
+
+    /**
+     * @return the cu
+     */
+    public ConnectionUnit getCu() {
+        return cu;
+    }
+
+    /**
+     * @param cu the cu to set
+     */
+    public void setCu(ConnectionUnit cu) {
+        this.cu = cu;
     }
 }

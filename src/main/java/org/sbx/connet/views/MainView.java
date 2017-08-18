@@ -5,13 +5,13 @@ import org.sbx.connet.entity.Node;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedProperty;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import org.sbx.connet.entity.Point;
 
 @Named(value = "mainView")
 @ViewScoped
@@ -22,8 +22,29 @@ public class MainView implements Serializable {
 
     @EJB
     private AddCuBean addCuBean;
+    
+    @EJB
+    private AddLinkBean addLinkBean;
+    
+    @Inject
+    private MenuBean menuBean;
 
     private List<Node> nodes;
+    
+    private Node selectedNode;
+    
+    public void onAddLinkDialogOpen() {
+        addLinkBean.clearForm();
+        menuBean.loadPointsMenu(selectedNode);
+        menuBean.loadNodeMenu();
+        menuBean.getNodeMenuItems().remove(selectedNode);
+        menuBean.setRemotePointsMenuItems(new ArrayList<Point>());
+    }
+    
+    public void onAddCuDialogOpen() {
+        addCuBean.clearForm();
+        menuBean.loadNodeMenu();
+    }
 
     @PostConstruct
     private void init() {
@@ -48,6 +69,48 @@ public class MainView implements Serializable {
 
     public void setAddCuBean(AddCuBean addCuBean) {
         this.addCuBean = addCuBean;
+    }
+
+    /**
+     * @return the addLinkBean
+     */
+    public AddLinkBean getAddLinkBean() {
+        return addLinkBean;
+    }
+
+    /**
+     * @param addLinkBean the addLinkBean to set
+     */
+    public void setAddLinkBean(AddLinkBean addLinkBean) {
+        this.addLinkBean = addLinkBean;
+    }
+
+    /**
+     * @return the menuBean
+     */
+    public MenuBean getMenuBean() {
+        return menuBean;
+    }
+
+    /**
+     * @param menuBean the menuBean to set
+     */
+    public void setMenuBean(MenuBean menuBean) {
+        this.menuBean = menuBean;
+    }
+
+    /**
+     * @return the selectedNode
+     */
+    public Node getSelectedNode() {
+        return selectedNode;
+    }
+
+    /**
+     * @param selectedNode the selectedNode to set
+     */
+    public void setSelectedNode(Node selectedNode) {
+        this.selectedNode = selectedNode;
     }
 
 }

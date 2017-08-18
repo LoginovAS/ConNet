@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS connection_units (
 
 CREATE TABLE IF NOT EXISTS points (
   point_id SERIAL,
-  point_number VARCHAR(50) NOT NULL,
+  point_number INT NOT NULL,
   PRIMARY KEY (point_id)
 ) Engine = InnoDB;
 

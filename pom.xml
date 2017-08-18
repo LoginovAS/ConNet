@@ -64,6 +64,7 @@
     </dependencies>
 
     <build>
+        <finalName>connet</finalName>
         <plugins>
             <plugin>
                 <groupId>org.glassfish.maven.plugin</groupId>

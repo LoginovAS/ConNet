@@ -17,7 +17,8 @@
     <p:panelGrid style="margin: 0 auto;">
         <p:row>
             <p:column>
-                <p:dataTable value="#{mainView.nodes}" var="n" style="width: 50%; margin: 0 auto;" >
+                <p:dataTable id="nodeTable" value="#{mainView.nodes}" var="n" style="width: 50%; margin: 0 auto;" selectionMode="single" selection="#{mainView.selectedNode}"
+                             rowKey="#{n.nodeId}">
                     <p:columnGroup type="header">
                         <p:row>
                             <p:column rowspan="2" headerText="Имя" />
@@ -61,10 +62,10 @@
                             <p:commandButton value="Посмотреть связи" />
                         </p:column>
                         <p:column>
-                            <p:commandButton value="Добавить связь" />
+                            <p:commandButton value="Добавить связь" disabled="#{not (mainView.selectedNode eq null)}" actionListener="#{mainView.onAddLinkDialogOpen()}" update="addLinkForm" oncomplete="PF('addLinkDlg').show();" />
                         </p:column>
                         <p:column>
-                            <p:commandButton value="Добавить коннектор" actionListener="#{mainView.addCuBean.onDialogOpen()}" update="addCuForm" oncomplete="PF('addCuDlg').show();" />
+                            <p:commandButton value="Добавить коннектор" actionListener="#{mainView.onAddCuDialogOpen()}" update="addCuForm" oncomplete="PF('addCuDlg').show();" />
                         </p:column>
                         <p:column>
                             <p:commandButton value="Посмотреть хост" />
@@ -75,8 +76,11 @@
         </p:row>
     </p:panelGrid>
     </h:form>
-    <p:dialog id="addCuDlg" modal="true" dynamic="true" resizable="false" widgetVar="addCuDlg">
+    <p:dialog id="addCuDlg" appendTo="@(body)" modal="true" width="550" dynamic="true" resizable="false" widgetVar="addCuDlg">
         <ui:include src="/addCuDlgPage.xhtml" />
+    </p:dialog>
+    <p:dialog id="addLinkDlg" appendTo="@(body)" modal="true" dynamic="true" resizable="false" widgetVar="addLinkDlg">
+        <ui:include src="/addLinkDlgPage.xhtml" />
     </p:dialog>
 </h:body>
 </html>

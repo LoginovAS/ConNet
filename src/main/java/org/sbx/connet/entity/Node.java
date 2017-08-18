@@ -68,17 +68,17 @@ public class Node implements Serializable {
     }
 
     public int getCapacity() {
-        int capacity = 0;
+        int c = 0;
         for (ConnectionUnit cu: connectors) {
-            capacity += cu.getCapacity();
+            c += cu.getCapacity();
         }
-        return capacity;
+        return c;
     }
 
     public int getFreePool() {
 
         int freePool = getCapacity();
-        for (ConnectionUnit cu: connectors) {
+        for (ConnectionUnit cu: getConnectors()) {
             for (Point p: cu.getPoints()) {
                 if (p.getLinkedPoint() != null) {
                     freePool--;
@@ -112,5 +112,19 @@ public class Node implements Serializable {
                 ", street='" + street + '\'' +
                 ", building='" + building + '\'' +
                 '}';
+    }
+
+    /**
+     * @return the connectors
+     */
+    public List<ConnectionUnit> getConnectors() {
+        return connectors;
+    }
+
+    /**
+     * @param connectors the connectors to set
+     */
+    public void setConnectors(List<ConnectionUnit> connectors) {
+        this.connectors = connectors;
     }
 }

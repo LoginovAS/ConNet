@@ -3,6 +3,7 @@ package org.sbx.connet.entity;
 import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,8 +25,8 @@ public class ConnectionUnit implements Serializable {
     @ManyToOne
     private Node node;
 
-    @OneToMany(mappedBy = "cu", fetch = FetchType.LAZY)
-    private List<Point> points;
+    @OneToMany(mappedBy = "cu", fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+    private List<Point> points = new ArrayList<>();
 
     transient private int capacity;
 
@@ -51,11 +52,9 @@ public class ConnectionUnit implements Serializable {
 
     @PostConstruct
     private void init() {
-        if (points != null && !points.isEmpty()) {
-            capacity = points.size();
-        } else {
-            capacity = 0;
-        }
+        
+        capacity = points.size();
+        
     }
 
     @Override

@@ -7,7 +7,11 @@ import javax.ejb.Stateless;
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import org.sbx.connet.entity.ConnectionUnit;
 import org.sbx.connet.entity.Node;
+import org.sbx.connet.entity.Point;
 
 @Named(value = "addCuBean")
 @Dependent
@@ -31,10 +35,25 @@ public class AddCuBean implements Serializable {
         clearForm();
     }
     
-    public void action() {
-        Node n = selectedNode;
-        String s1 = newCuName;
-        String s2 = newCapacity;
+    public void createCu() {
+        ConnectionUnit cu = new ConnectionUnit();
+        
+        for (int i = 0; i < Integer.parseInt(newCapacity); i++) {
+            Point point = new Point();
+            point.setPointNumber(i);
+            point.setCu(cu);
+            cu.getPoints().add(point);
+        }
+        
+        cu.setCuName(newCuName);
+        cu.setCapacity(Integer.parseInt(newCapacity));
+        cu.setNode(selectedNode);
+        
+        selectedNode.getConnectors().add(cu);
+        
+        connetBean.createConnectionUnit(cu);
+        
+        clearForm();
     }
 
     public Node getSelectedNode() {
