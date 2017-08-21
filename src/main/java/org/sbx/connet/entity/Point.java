@@ -10,9 +10,7 @@ import java.util.Objects;
     @NamedQuery(name = "Point.getPointsByCu",
                 query = "SELECT p FROM Point p WHERE p.cu = :cu"),
     @NamedQuery(name = "Point.getAllPoints",
-                query = "SELECT p FROM Point p"),
-    @NamedQuery(name = "Point.getPointByLink",
-                query = "SELECT p FROM Point p, Link l WHERE p.pointId = :id and ( p.pointId = l.point1 or p.pointId = l.point2)")
+                query = "SELECT p FROM Point p")
 })
 public class Point implements Serializable {
 

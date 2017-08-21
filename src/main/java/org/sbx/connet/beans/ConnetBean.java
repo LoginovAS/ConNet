@@ -26,16 +26,4 @@ public class ConnetBean implements Serializable {
         return em.createNamedQuery("Point.getAllPoints").getResultList();
     }
     
-    public Point getPointByLink(int id) {
-        return (Point) em.createNamedQuery("Point.getPointByLink").setParameter("id", id).getSingleResult();
-    }
-    
-    public void createConnectionUnit(ConnectionUnit cu) {
-        em.persist(cu);
-    }
-    
-    public ConnectionUnit getCuById(long id) {
-        return em.find(ConnectionUnit.class, id);
-    }
-    
 }

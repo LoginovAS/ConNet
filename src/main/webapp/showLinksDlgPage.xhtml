@@ -3,13 +3,8 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:pm="http://primefaces.org/mobile">
-    <p:panelGrid id="showLinkMsgPanel" rendered="#{empty mainView.showLinksBean.remoteNodes or empty mainView.showLinksBean.remotePoints}" layout="grid" columns="1">
-        <p:outputLabel value="Нет связей" />
-        <p:commandButton value="Закрыть" oncomplete="PF('showLinkDlg').hide();" />
-    </p:panelGrid>
-    
-    <h:form rendered="#{not empty mainView.showLinksBean.remoteNodes and not empty mainView.showLinksBean.remotePoints}" id="showLinksForm">
+                xmlns:pm="http://primefaces.org/mobile">       
+    <h:form id="showLinksForm">
         <p:panelGrid id="showLinksPanelHeader" style="width: 100%;">
         <f:facet name="header">
             <p:row>
@@ -19,13 +14,13 @@
             </p:row>
             <p:row>
 
-                    <p:column>
+                <p:column style="width: 30%;">
                         <h:outputText value="Точка хоста" />
                     </p:column>
                     <p:column>
                         <h:outputText value="Удалённый хост" />
                     </p:column>
-                    <p:column>
+                    <p:column style="width: 30%;">
                         <h:outputText value="Точка связи" />
                     </p:column>
 
@@ -37,14 +32,14 @@
         <p:panelGrid id="showLinksPanelBody" style="width: 600px;">    
         <ui:repeat value="#{mainView.showLinksBean.nodePoints}" var="point" varStatus="status">
             <p:row>
-                <p:column style="text-align: center;">
-                    <h:outputText value="#{point.pointNumber}" />
+                <p:column style="text-align: right; width: 30%;">
+                    <h:outputText value="#{point}" />
                 </p:column>
                 <p:column style="text-align: center;">
-                    <h:outputText value="#{(mainView.showLinksBean.remoteNodes eq null or empty mainView.showLinksBean.remoteNodes) ? '-' : mainView.showLinksBean.remoteNodes[status.index].nodeName}" />
+                    <h:outputText value="#{empty mainView.showLinksBean.remoteNodes ? '-' : mainView.showLinksBean.remoteNodes[status.index].nodeName}" />
                 </p:column>
-                <p:column style="width: 30%; text-align: right;">
-                    <h:outputText value="#{(mainView.showLinksBean.remotePoints eq null or empty mainView.showLinksBean.remotePoints) ? '-' : mainView.showLinksBean.remotePoints[status.index]}" />
+                <p:column style="width: 30%; text-align: center;">
+                    <h:outputText value="#{empty mainView.showLinksBean.remotePoints ? '-' : mainView.showLinksBean.remotePoints[status.index]}" />
                 </p:column>
             </p:row>
         </ui:repeat>

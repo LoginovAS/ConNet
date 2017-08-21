@@ -59,17 +59,8 @@
             <p:column>
                 <p:panelGrid id="mainPageButtonPanel" style="margin: 0 auto;">
                     <p:row>
-                        <p:column>
+                        <p:column colspan="4">
                             <p:commandButton value="Посмотреть связи" disabled="#{mainView.selectedNode eq null}" actionListener="#{mainView.onShowLinksDialog()}" oncomplete="PF('showLinkDlg').show();" update="showLinksForm" />
-                        </p:column>
-                        <p:column>
-                            <p:commandButton value="Добавить связь" disabled="#{mainView.selectedNode eq null}" actionListener="#{mainView.onAddLinkDialogOpen()}" update="addLinkForm" oncomplete="PF('addLinkDlg').show();" />
-                        </p:column>
-                        <p:column>
-                            <p:commandButton value="Добавить коннектор" actionListener="#{mainView.onAddCuDialogOpen()}" update="addCuForm" oncomplete="PF('addCuDlg').show();" />
-                        </p:column>
-                        <p:column>
-                            <p:commandButton value="Посмотреть хост" />
                         </p:column>
                     </p:row>
                 </p:panelGrid>
@@ -77,12 +68,6 @@
         </p:row>
     </p:panelGrid>
     </h:form>
-    <p:dialog id="addCuDlg" appendTo="@(body)" modal="true" width="550" dynamic="true" resizable="false" widgetVar="addCuDlg" closable="false">
-        <ui:include src="/addCuDlgPage.xhtml" />
-    </p:dialog>
-    <p:dialog id="addLinkDlg" appendTo="@(body)" modal="true" dynamic="true" resizable="false" widgetVar="addLinkDlg" onHide="#{mainView.onAddLinkDialogClose()}">
-        <ui:include src="/addLinkDlgPage.xhtml" />
-    </p:dialog>
     <p:dialog id="showLinkDlg" header="#{mainView.selectedNode.nodeName}" appendTo="@(body)" modal="true" dynamic="true" resizable="false" widgetVar="showLinkDlg" closable="false">
         <ui:include src="/showLinksDlgPage.xhtml" />
     </p:dialog>

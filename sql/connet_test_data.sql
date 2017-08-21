@@ -22,50 +22,50 @@ INSERT INTO `connection_units` (`cu_id`, `cu_name`) VALUES
 
 -- points
 INSERT INTO `points` (`point_id`, `point_number`) VALUES
-	(1, 1),
-	(2, 2),
-	(3, 3),
-	(4, 4),
-	(5, 5),
-	(6, 1),
-	(7, 2),
-	(8, 3),
-	(9, 4),
-	(10, 5),
-	(12, 1),
-	(13, 2),
-	(14, 3),
-	(15, 4),
-	(16, 5),
-	(17, 6),
-	(18, 7),
-	(19, 8),
-	(20, 9),
-	(21, 10),
-	(22, 1),
-	(23, 2),
-	(24, 3),
-	(25, 4),
-	(26, 5),
-	(27, 1),
-	(28, 2),
-	(29, 3),
-	(30, 4),
-	(31, 5),
-	(32, 1),
-	(33, 2),
-	(34, 3),
-	(35, 4),
-	(36, 5),
-	(37, 1),
-	(38, 2),
-	(39, 1),
-	(40, 2),
-	(41, 3),
-	(42, 1),
-	(43, 2),
-	(44, 3),
-	(45, 4);
+	(1, 0),
+	(2, 1),
+	(3, 2),
+	(4, 3),
+	(5, 4),
+	(6, 0),
+	(7, 1),
+	(8, 2),
+	(9, 3),
+	(10, 4),
+	(12, 0),
+	(13, 1),
+	(14, 2),
+	(15, 3),
+	(16, 4),
+	(17, 5),
+	(18, 6),
+	(19, 7),
+	(20, 8),
+	(21, 9),
+	(22, 0),
+	(23, 1),
+	(24, 2),
+	(25, 3),
+	(26, 4),
+	(27, 0),
+	(28, 1),
+	(29, 2),
+	(30, 3),
+	(31, 4),
+	(32, 0),
+	(33, 1),
+	(34, 2),
+	(35, 3),
+	(36, 4),
+	(37, 0),
+	(38, 1),
+	(39, 0),
+	(40, 1),
+	(41, 2),
+	(42, 0),
+	(43, 1),
+	(44, 2),
+	(45, 3);
 
 -- Данные линковочных таблиц
 
@@ -144,17 +144,3 @@ INSERT INTO `cu_point` (`point_id`, `cu_id`) VALUES
 	(45, 9);
 
 COMMIT;
-
--- контрольный замер
---S ELECT COUNT(*) FROM `nodes`;
-SELECT COUNT(*) FROM `nodes`; -- Result: 5;
--- SELECT COUNT(*) FROM `connection_units`;
-SELECT COUNT(*) FROM `connection_units`; -- Result: 9;
--- SELECT COUNT(*) FROM `points`;
-SELECT COUNT(*) FROM `points`; -- Result: 44;
--- SELECT COUNT(*) FROM `links`;
-SELECT COUNT(*) FROM `links`; -- Result: 9;
--- SELECT COUNT(*) FROM `node_cu`;
-SELECT COUNT(*) FROM `node_cu`; -- Result: 9;
--- SELECT COUNT(*) FROM `cu_point`;
-SELECT COUNT(*) FROM `cu_point`; -- Result: 44;
