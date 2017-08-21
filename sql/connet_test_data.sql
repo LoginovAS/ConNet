@@ -1,16 +1,14 @@
 -- Данные основных таблиц
 
 -- nodes
-ALTER TABLE `nodes` DISABLE KEYS;
 INSERT INTO `nodes` (`node_id`, `node_name`, `region`, `street`, `building`) VALUES
 	(2, 'TestNode1', 'Санкт-Петербург', 'Невский проспект', '11 лит А'),
 	(3, 'TestNode2', 'Санкт-Петербург', 'Есенина', '4'),
 	(4, 'TestNode3', 'Санкт-Петербург', 'Композиторов', '15к1'),
-	(5, 'TestNode4', 'Москва', 'Кожевническая', '7/1');
-ALTER TABLE `nodes` ENABLE KEYS;
+	(5, 'TestNode4', 'Москва', 'Кожевническая', '7/1'),
+	(6, 'TestNode5', 'Москва', 'Большая Садовая', '10');
 
 -- connection_units
-ALTER TABLE `connection_units` DISABLE KEYS;
 INSERT INTO `connection_units` (`cu_id`, `cu_name`) VALUES
 	(1, 'ConnectionUnit1'),
 	(2, 'ConnectionUnit2'),
@@ -19,11 +17,10 @@ INSERT INTO `connection_units` (`cu_id`, `cu_name`) VALUES
 	(5, 'ConnectionUnit5'),
 	(6, 'ConnectionUnit6'),
 	(7, 'ConnectionUnit7'),
-	(8, 'ConnectionUnit8');
-ALTER TABLE `connection_units` ENABLE KEYS;
+	(8, 'ConnectionUnit8'),
+	(9, 'ConnectionUnit9' );
 
 -- points
-ALTER TABLE `points` DISABLE KEYS;
 INSERT INTO `points` (`point_id`, `point_number`) VALUES
 	(1, 1),
 	(2, 2),
@@ -64,17 +61,29 @@ INSERT INTO `points` (`point_id`, `point_number`) VALUES
 	(38, 2),
 	(39, 1),
 	(40, 2),
-	(41, 3);
-ALTER TABLE `points` ENABLE KEYS;
-
--- links
-/* ALTER TABLE `links` DISABLE KEYS */;
-/* ALTER TABLE `links` ENABLE KEYS */;
+	(41, 3),
+	(42, 1),
+	(43, 2),
+	(44, 3),
+	(45, 4);
 
 -- Данные линковочных таблиц
 
+-- links
+-- Реализует связь 'Один к одному' для двух точек.
+INSERT INTO `links` (`point_id_1`, `point_id_2`) VALUES
+        (1, 22),
+        (2, 37),
+        (3, 39),
+        (4, 23),
+        (5, 33),
+        (32, 6),
+        (34, 27),
+        (35, 31),
+        (36, 38);
+
 -- node_cu
-ALTER TABLE `node_cu` DISABLE KEYS;
+-- Реализует связь 'один ко многим' для Коннекторов и Хостов
 INSERT INTO `node_cu` (`cu_id`, `node_id`) VALUES
 	(1, 2),
 	(2, 2),
@@ -83,11 +92,11 @@ INSERT INTO `node_cu` (`cu_id`, `node_id`) VALUES
 	(5, 3),
 	(6, 4),
 	(7, 5),
-	(8, 5);
-ALTER TABLE `node_cu` ENABLE KEYS;
+	(8, 5),
+	(9, 6);
 
 -- cu_point
-ALTER TABLE `cu_point` DISABLE KEYS;
+-- Реализует связь 'один ко многим' для Точек и Коннекторов
 INSERT INTO `cu_point` (`point_id`, `cu_id`) VALUES
 	(1, 1),
 	(2, 1),
@@ -128,5 +137,24 @@ INSERT INTO `cu_point` (`point_id`, `cu_id`) VALUES
 	(38, 7),
 	(39, 8),
 	(40, 8),
-	(41, 8);
-ALTER TABLE `cu_point` ENABLE KEYS;
+	(41, 8),
+	(42, 9),
+	(43, 9),
+	(44, 9),
+	(45, 9);
+
+COMMIT;
+
+-- контрольный замер
+--S ELECT COUNT(*) FROM `nodes`;
+SELECT COUNT(*) FROM `nodes`; -- Result: 5;
+-- SELECT COUNT(*) FROM `connection_units`;
+SELECT COUNT(*) FROM `connection_units`; -- Result: 9;
+-- SELECT COUNT(*) FROM `points`;
+SELECT COUNT(*) FROM `points`; -- Result: 44;
+-- SELECT COUNT(*) FROM `links`;
+SELECT COUNT(*) FROM `links`; -- Result: 9;
+-- SELECT COUNT(*) FROM `node_cu`;
+SELECT COUNT(*) FROM `node_cu`; -- Result: 9;
+-- SELECT COUNT(*) FROM `cu_point`;
+SELECT COUNT(*) FROM `cu_point`; -- Result: 44;

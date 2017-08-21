@@ -9,6 +9,8 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import org.sbx.connet.entity.Point;
@@ -28,10 +30,18 @@ public class MainView implements Serializable {
     
     @Inject
     private MenuBean menuBean;
+    
+    @Inject
+    private ShowLinksBean showLinksBean;
 
     private List<Node> nodes;
     
     private Node selectedNode;
+    
+    public void onShowLinksDialog() {
+        showLinksBean.clear();
+        showLinksBean.loadValues(selectedNode);
+    }
     
     public void onAddLinkDialogOpen() {
         addLinkBean.clearForm();
@@ -39,6 +49,15 @@ public class MainView implements Serializable {
         menuBean.loadNodeMenu();
         menuBean.getNodeMenuItems().remove(selectedNode);
         menuBean.setRemotePointsMenuItems(new ArrayList<Point>());
+    }
+    
+    public void onRemoteNodeSelect(ValueChangeEvent event) {
+        Node node = (Node) event.getNewValue();
+        menuBean.loadRemotePointsMenu(addLinkBean.getRemoteNode());
+    }
+    
+    public void onAddLinkDialogClose() {
+        addLinkBean.clearForm();
     }
     
     public void onAddCuDialogOpen() {
@@ -111,6 +130,20 @@ public class MainView implements Serializable {
      */
     public void setSelectedNode(Node selectedNode) {
         this.selectedNode = selectedNode;
+    }
+
+    /**
+     * @return the showLinksBean
+     */
+    public ShowLinksBean getShowLinksBean() {
+        return showLinksBean;
+    }
+
+    /**
+     * @param showLinksBean the showLinksBean to set
+     */
+    public void setShowLinksBean(ShowLinksBean showLinksBean) {
+        this.showLinksBean = showLinksBean;
     }
 
 }

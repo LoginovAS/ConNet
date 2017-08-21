@@ -10,7 +10,9 @@ import java.util.Objects;
     @NamedQuery(name = "Point.getPointsByCu",
                 query = "SELECT p FROM Point p WHERE p.cu = :cu"),
     @NamedQuery(name = "Point.getAllPoints",
-                query = "SELECT p FROM Point p")
+                query = "SELECT p FROM Point p"),
+    @NamedQuery(name = "Point.getPointByLink",
+                query = "SELECT p FROM Point p, Link l WHERE p.pointId = :id and ( p.pointId = l.point1 or p.pointId = l.point2)")
 })
 public class Point implements Serializable {
 
@@ -28,15 +30,20 @@ public class Point implements Serializable {
     @Column(name = "point_number")
     private int pointNumber;
 
+    @OneToOne(mappedBy = "linkOwner")
+    @JoinTable(name = "links", joinColumns = { @JoinColumn(name = "point_id_1", referencedColumnName = "point_id")},
+                                inverseJoinColumns = { @JoinColumn(name = "point_id_2", referencedColumnName = "point_id")})
+    private Point linkedPoint;
+    
+    @OneToOne
+    @JoinTable(name = "links", joinColumns = { @JoinColumn(name = "point_id_2", referencedColumnName = "point_id")},
+                                inverseJoinColumns = { @JoinColumn(name = "point_id_1", referencedColumnName = "point_id")})
+    private Point linkOwner;
+    
     @JoinTable(name = "cu_point", joinColumns = { @JoinColumn(name = "point_id", referencedColumnName = "point_id") },
                                   inverseJoinColumns = { @JoinColumn(name = "cu_id", referencedColumnName = "cu_id") })
     @ManyToOne
     private ConnectionUnit cu;
-
-    @OneToOne
-    @JoinTable(name = "links", joinColumns = { @JoinColumn(name = "point_id_1", referencedColumnName = "point_id") },
-                                inverseJoinColumns = { @JoinColumn(name = "point_id_2", referencedColumnName = "point_id") })
-    private Point linkedPoint;
 
     public long getPointId() {
         return pointId;
@@ -88,4 +95,19 @@ public class Point implements Serializable {
     public void setCu(ConnectionUnit cu) {
         this.cu = cu;
     }
+
+    /**
+     * @return the linkOwner
+     */
+    public Point getLinkOwner() {
+        return linkOwner;
+    }
+
+    /**
+     * @param linkOwner the linkOwner to set
+     */
+    public void setLinkOwner(Point linkOwner) {
+        this.linkOwner = linkOwner;
+    }
+    
 }

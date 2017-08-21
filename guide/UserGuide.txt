@@ -1,0 +1,28 @@
+1. Платформа.
+При необходимости произвести установку и минимально необходимую настройку согласно документации соответствующего продукта.
+ - Glassfish 4.1
+ - Java SE 8u121
+ - MariaDB Server v.10.1.21
+
+ 2. Установка.
+
+ 2.1. База данных.
+
+ - На сервере MariaDB (Mysql) создать новую базу данных:
+ Пример:
+ MariaDB [(none)]> create database connet;
+
+ - Создать нового пользователя базы данных и выдать ему полные права на созданную базу.
+ Пример:
+
+ MariaDB [(none)]> grant all privileges on connet.* to connet@localhost identified by 'connet';
+
+ - Зайти под созданным пользователем в базу и выполнить скрипт connet_test_schema.sql.
+ Пример:
+ MariaDB [connet]> source connet_test_schema.sql
+
+ При наличии ошибок проверить текущую базу, к которой подключен пользователь, а также права на текущую базу.
+
+ - Залить в базу тестовые данные. Для этого выполнить скрипт connet_test_data.sql.
+ Пример:
+ MariaDB [connet]> source connet_test_data.sql

@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+    <p:panelGrid id="showLinkMsgPanel" rendered="#{empty mainView.showLinksBean.remoteNodes or empty mainView.showLinksBean.remotePoints}" layout="grid" columns="1">
+        <p:outputLabel value="Нет связей" />
+        <p:commandButton value="Закрыть" oncomplete="PF('showLinkDlg').hide();" />
+    </p:panelGrid>
+    
+    <h:form rendered="#{not empty mainView.showLinksBean.remoteNodes and not empty mainView.showLinksBean.remotePoints}" id="showLinksForm">
+        <p:panelGrid id="showLinksPanelHeader" style="width: 100%;">
+        <f:facet name="header">
+            <p:row>
+                <p:column colspan="3">
+                    <h:outputLabel value="#{mainView.selectedNode.nodeName}" />
+                </p:column>
+            </p:row>
+            <p:row>
+
+                    <p:column>
+                        <h:outputText value="Точка хоста" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="Удалённый хост" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="Точка связи" />
+                    </p:column>
+
+            </p:row>
+        </f:facet>
+    </p:panelGrid>
+    
+    <p:scrollPanel style="height: 300px; width: 100%;" mode="native">
+        <p:panelGrid id="showLinksPanelBody" style="width: 600px;">    
+        <ui:repeat value="#{mainView.showLinksBean.nodePoints}" var="point" varStatus="status">
+            <p:row>
+                <p:column style="text-align: center;">
+                    <h:outputText value="#{point.pointNumber}" />
+                </p:column>
+                <p:column style="text-align: center;">
+                    <h:outputText value="#{(mainView.showLinksBean.remoteNodes eq null or empty mainView.showLinksBean.remoteNodes) ? '-' : mainView.showLinksBean.remoteNodes[status.index].nodeName}" />
+                </p:column>
+                <p:column style="width: 30%; text-align: right;">
+                    <h:outputText value="#{(mainView.showLinksBean.remotePoints eq null or empty mainView.showLinksBean.remotePoints) ? '-' : mainView.showLinksBean.remotePoints[status.index]}" />
+                </p:column>
+            </p:row>
+        </ui:repeat>
+    </p:panelGrid>
+    </p:scrollPanel>
+        <p:panelGrid id="showLinksPanelFooter" style="width: 100%;">
+        <p:row>
+            <p:column colspan="3" style="text-align: center;">
+                <p:commandButton value="Закрыть" actionListener="#{mainView.showLinksBean.clear()}" oncomplete="PF('showLinkDlg').hide();" update="showLinksForm" />
+            </p:column>
+        </p:row>
+    </p:panelGrid>
+    </h:form>
+</ui:composition>
+

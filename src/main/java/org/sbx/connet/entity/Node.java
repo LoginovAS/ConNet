@@ -80,7 +80,7 @@ public class Node implements Serializable {
         int freePool = getCapacity();
         for (ConnectionUnit cu: getConnectors()) {
             for (Point p: cu.getPoints()) {
-                if (p.getLinkedPoint() != null) {
+                if ((p.getLinkedPoint() != null) || (p.getLinkOwner() != null)) {
                     freePool--;
                 }
             }

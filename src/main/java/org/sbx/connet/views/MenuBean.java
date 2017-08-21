@@ -26,9 +26,11 @@ public class MenuBean implements Serializable{
     
     private List<Node> nodeMenuItems;
     
-    private List<Point> nodePointsMenuItems;
+    volatile private List<Point> nodePointsMenuItems;
     
-    private List<Point> remotePointsMenuItems;
+    volatile private List<Point> remotePointsMenuItems;
+    
+    private Node selectedNode;
     
     @PostConstruct
     private void init() {
@@ -44,13 +46,31 @@ public class MenuBean implements Serializable{
     }
     
     public void  loadPointsMenu(Node node) {
-        for (ConnectionUnit cu: node.getConnectors()) {
-            for (Point p: cu.getPoints()) {
-                if (p.getLinkedPoint() == null) {
-                    nodePointsMenuItems.add(p);
+        nodePointsMenuItems.clear();
+        if (node != null) {
+            for (ConnectionUnit cu: node.getConnectors()) {
+                for (Point p: cu.getPoints()) {
+                    if (p.getLinkedPoint() == null) {
+                        nodePointsMenuItems.add(p);
+                    }
                 }
             }
         }
+        
+    }
+    
+    public void loadRemotePointsMenu(Node node) {
+        remotePointsMenuItems.clear();
+        if (node != null) {
+            for (ConnectionUnit cu: node.getConnectors()) {
+                for (Point p: cu.getPoints()) {
+                    if (p.getLinkedPoint() == null) {
+                        remotePointsMenuItems.add(p);
+                    }
+                }
+            }
+        }
+        
     }
 
     public List<Node> getNodeMenuItems() {
@@ -87,6 +107,20 @@ public class MenuBean implements Serializable{
      */
     public void setRemotePointsMenuItems(List<Point> remotePointsMenuItems) {
         this.remotePointsMenuItems = remotePointsMenuItems;
+    }
+
+    /**
+     * @return the selectedNode
+     */
+    public Node getSelectedNode() {
+        return selectedNode;
+    }
+
+    /**
+     * @param selectedNode the selectedNode to set
+     */
+    public void setSelectedNode(Node selectedNode) {
+        this.selectedNode = selectedNode;
     }
     
 }

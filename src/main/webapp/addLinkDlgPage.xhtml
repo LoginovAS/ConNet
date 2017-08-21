@@ -13,7 +13,8 @@
             </p:selectOneMenu>
             
             <p:outputLabel for="remoteNodeName" value="Удалённый хост: " />
-            <p:selectOneMenu id="remoteNodeName" value="#{mainView.addLinkBean.remoteNode}" converter="nodeConverter">
+            <p:selectOneMenu id="remoteNodeName" valueChangeListener="#{mainView.onRemoteNodeSelect}" value="#{mainView.addLinkBean.remoteNode}" converter="nodeConverter">
+                <p:ajax update="addLinkForm:remotePointName" partialSubmit="true" />
                 <f:selectItem itemLabel="Удалённый хост" itemValue="#{null}" />
                 <f:selectItems value="#{mainView.menuBean.nodeMenuItems}" var="node" itemLabel="#{node.nodeName}" itemValue="#{node}" />
             </p:selectOneMenu>
@@ -23,6 +24,9 @@
                 <f:selectItem itemLabel="Удалённая точка" itemValue="#{null}" />
                 <f:selectItems value="#{mainView.menuBean.remotePointsMenuItems}" var="point" itemLabel="#{point.cu.cuName.concat('_').concat(point.pointNumber)}" itemValue="#{point}" />
             </p:selectOneMenu>
+            
+            <p:commandButton value="Сохранить" />
+            <p:commandButton value="Отменить" />
         </p:panelGrid>
     </h:form>
 </ui:composition>
